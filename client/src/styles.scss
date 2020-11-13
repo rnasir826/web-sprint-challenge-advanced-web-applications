@@ -61,7 +61,8 @@ body,
 }
 
 form {
-  margin-top: 60px;
+  margin-top: 100px;
+  margin-right: 20%;
   display: flex;
   flex-direction: column;
 
@@ -96,4 +97,15 @@ form {
     padding: 3px 8px;
     margin-top: 16px;
   }
+}
+body{
+  background-image: url('https://i0.wp.com/rebootsocial.com/wp-content/uploads/2017/11/Bubbles.png?resize=800%2C533&ssl=1');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position:center;
+  background-size: cover;
+}
+h1{
+  color: purple;
+  margin-left: 28%;
 }
