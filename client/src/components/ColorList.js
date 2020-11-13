@@ -6,7 +6,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, getColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -17,7 +17,6 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const saveEdit = e => {
-    e.preventDefault();
     axiosWithAuth()
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
@@ -29,7 +28,7 @@ const ColorList = ({ colors, updateColors }) => {
         )
       })
       .catch(err => console.log(err));
-      console.log(colorToEdit)
+    console.log(colorToEdit)
   };
 
   const deleteColor = color => {
@@ -38,7 +37,7 @@ const ColorList = ({ colors, updateColors }) => {
       .then(res => {
         updateColors(colors.filter(color => color.id !== res.data))
       })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   };
 
   return (
@@ -46,12 +45,13 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li data-testid="color" key={color.color} onClick={() => editColor(color)}>
             <span>
-              <span className='delete' data-testid='colors' onClick={e => {
-                e.stopPropagation();
-                deleteColor(color)
-              }}>
+              <span className='delete' onClick={e => {
+                 e.stopPropagation();
+                 deleteColor(color)
+               }
+               }>
                 X
               </span>{" "}
               {color.color}
